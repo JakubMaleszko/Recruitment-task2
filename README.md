@@ -24,8 +24,8 @@ Chcielibyśmy, abyś stworzył dla nas prosty interfejs REST API - podstawową b
 
 * Zachęcamy do korzystania z najnowszego standardu i funkcji ECMAScript.
 * Możesz napisać swoje rozwiązanie przy użyciu wybranego frameworka, bibliotek i bazy danych - mile widziane jest podzielenie się uzasadnieniem ich wyboru!
-* Przynajmniej podstawowe testy punktów końcowych i ich funkcjonalności są obowiązkowe. Ich dokładny zakres i forma pozostawiamy Tobie.
+* Przynajmniej podstawowe testy punktów końcowych i ich funkcjonalności są obowiązkowe. Ich dokładny zakres i formę pozostawiamy Tobie.
 * Kod aplikacji powinien być przechowywany w publicznym repozytorium, abyśmy mogli go przeczytać, pobrać i zbudować samodzielnie. Pamiętaj, aby dołączyć plik README lub przynajmniej podstawowe uwagi dotyczące wymagań i konfiguracji aplikacji - powinniśmy być w stanie łatwo i szybko ją uruchomić.
-* Aplikacja musi być hostowana i publicznie dostępna dla nas online - polecamy [Heroku] (https://heroku.com).
+* Aplikacja musi być hostowana i publicznie dostępna dla nas online - polecamy [Heroku](https://heroku.com).
 
 **Powodzenia!**
