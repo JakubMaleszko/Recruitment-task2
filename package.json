@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.5",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "run": "tsc && node dist/main.js",
+    "dev": "tsx watch src/main.ts"
+  }
+}
