@@ -6,9 +6,8 @@ import { isImdbID } from "../utils/imdb";
 
 export const getMovieByName = async (req: Request, res: Response) => {
     const apiKey = process.env.API_KEY;
-    let title;
-    if (!req.body.title || typeof req.body.title != 'string') return res.status(400).json({ error: "Invalid request, title is required" });
-    title = req.body.title;
+   if (!req.body || typeof req.body.title !== 'string') return res.status(400).json({ error: "Invalid request, title is required" });
+    const title = req.body.title;
     try {
         const response = await fetch(`http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`);
         const data = await response.json();

@@ -6,15 +6,21 @@
     "mongoose": "^8.16.5"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "tsx": "^4.20.3",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "@types/node": "^24.1.0"
+    "@types/node": "^24.1.0",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.0",
+    "jest": "^30.0.5"
   },
   "scripts": {
     "build": "tsc",
     "run": "tsc && node dist/main.js",
-    "dev": "tsx watch src/main.ts"
+    "dev": "tsx watch src/main.ts",
+    "test": "jest"
   }
 }

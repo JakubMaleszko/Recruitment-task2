@@ -1,31 +1,94 @@
-# Zadanie
+# Recruitment-task2
+This application uses the following technologies:
+-  `Node.js`
+-  `npm`
+-  `Jest` – for testing
+-  `MongoDB` – db
+---
+## Required Environment Variables
+Before running the application, make sure to set the following environment variables:
 
-Przeczytaj uważnie instrukcję i odeślij nam link z rozwiązaniem.
+-  `PORT` – the port your application will run on
 
-### Specyfikacja
+-  `MONGODB_URI` – the URI for your MongoDB instance
 
-Chcielibyśmy, abyś stworzył dla nas prosty interfejs REST API - podstawową bazę danych filmów współpracującą z zewnętrznym interfejsem API. Oto pełna specyfikacja punktów końcowych, które chcielibyśmy mieć:
+-  `API_KEY` – the [OMDb](https://www.omdbapi.com/) api key
+---
+## Installing Dependencies
+To install dependencies:
+```bash
+npm  install
+```
+## Running the application
+To build use:
+```bash
+npm  run  build
+```
+To build and run:
+```bash
+npm  run  start
+```
 
-* `POST /movies`:
-  * Treść żądania powinna zawierać tylko tytuł filmu, a jego obecność powinna zostać zweryfikowana.
-  * Na podstawie przekazanego tytułu, inne szczegóły filmu należy pobrać z http://www.omdbapi.com/ (lub innej podobnej, publicznej bazy danych filmów) - i zapisać w bazie danych aplikacji.
-  * Odpowiedź na żądanie powinna zawierać pełny obiekt filmowy wraz ze wszystkimi danymi pobranymi z zewnętrznego interfejsu API.
-* `GET /movies`:
-  * Powinien pobrać listę wszystkich filmów już obecnych w bazie danych aplikacji.
-  * Dodatkowe filtrowanie, sortowanie jest w pełni opcjonalne - ale niektóre implementacje są bonusem.
-* `POST /comments`:
-  * Treść żądania powinna zawierać identyfikator filmu już znajdującego się w bazie danych oraz treść komentarza.
-  * Komentarz należy zapisać w bazie danych aplikacji i zwrócić w odpowiedzi na żądanie.
-* `GET /comments`:
-  * Powinien pobrać listę wszystkich komentarzy obecnych w bazie danych aplikacji.
-  * Powinien umożliwiać filtrowanie komentarzy według powiązanego filmu, poprzez przekazanie jego identyfikatora.
+To run in watch mode :
 
-### Zasady i wskazówki
+```bash
+npm  run  dev
+```
 
-* Zachęcamy do korzystania z najnowszego standardu i funkcji ECMAScript.
-* Możesz napisać swoje rozwiązanie przy użyciu wybranego frameworka, bibliotek i bazy danych - mile widziane jest podzielenie się uzasadnieniem ich wyboru!
-* Przynajmniej podstawowe testy punktów końcowych i ich funkcjonalności są obowiązkowe. Ich dokładny zakres i formę pozostawiamy Tobie.
-* Kod aplikacji powinien być przechowywany w publicznym repozytorium, abyśmy mogli go przeczytać, pobrać i zbudować samodzielnie. Pamiętaj, aby dołączyć plik README lub przynajmniej podstawowe uwagi dotyczące wymagań i konfiguracji aplikacji - powinniśmy być w stanie łatwo i szybko ją uruchomić.
-* Aplikacja musi być hostowana i publicznie dostępna dla nas online - polecamy [Heroku](https://heroku.com).
+## Testing application
 
-**Powodzenia!**
+To run tests use:
+
+```bash
+npm  run  test
+```
+
+## API Endpoints
+
+###  POST `/movies`
+
+Fetches movie details by title from the [OMDb API](https://www.omdbapi.com/) and stores them in the database.
+
+**Request Body:**
+```json
+{
+  "title": "Movie Title"
+}
+```
+**Returns:**
+
+- Movie details from OMDb (e.g., imdbID, Title, Year, etc.)
+- Inserts into DB if not already stored
+---
+### GET `/movies/:id`
+Retrieves a movie by **either MongoDB ObjectId or IMDb ID.**
+
+**Path Parameters:**
+- `id` – MongoDB _id or IMDb imdbID
+
+**Returns:**
+ - Movie details
+---
+### POST `/comments`
+Adds a comment to a movie.
+
+**Request Body:**
+```json
+{
+  "movieId": "ObjectId or imdbID",
+  "content": "Your comment here"
+}
+```
+**Returns:**
+
+ - Created comment object
+---
+### GET `/comments?movieId=...`
+Fetches comments for a specific movie (optional), or all comments if no movieId is provided.
+
+**Query Parameters:**
+
+- `movieId` – MongoDB ObjectId or IMDb ID **(optional)**
+
+**Returns:**
+- List of comments
