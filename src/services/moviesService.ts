@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import movieModel from "../models/movieModel";
 import { isValidObjectId } from "mongoose";
 import { error } from "console";
+import { isImdbID } from "../utils/imdb";
 
 export const getMovieByName = async (req: Request, res: Response) => {
     const apiKey = process.env.API_KEY;
@@ -24,17 +25,21 @@ export const getMovieByName = async (req: Request, res: Response) => {
 
 export const getMovieById = async (req: Request, res: Response) => {
     const id = req.params.id;
-    if (isValidObjectId(id)) {
-        const movie = await movieModel.findById(id);
-        if (!movie) return res.status(404).json({ error: 'Movie not found' });
-        return res.status(200).json(movie);
-    }
-    else if (/tt\d{7,8}/.test(id)) {
-        const movie = await movieModel.findOne({ imdbID: id });
-        if (!movie) return res.status(404).json({ error: 'Movie not found' });
-        return res.status(200).json(movie);
-    }
-    else {
-        return res.status(400).json({ error: 'Invalid request, id field is required' });
+    try {
+        if (isValidObjectId(id)) {
+            const movie = await movieModel.findById(id);
+            if (!movie) return res.status(404).json({ error: 'Movie not found' });
+            return res.status(200).json(movie);
+        }
+        else if (isImdbID(id)) {
+            const movie = await movieModel.findOne({ imdbID: id });
+            if (!movie) return res.status(404).json({ error: 'Movie not found' });
+            return res.status(200).json(movie);
+        }
+        else {
+            return res.status(400).json({ error: 'Invalid request, id field is required' });
+        }
+    } catch (err) {
+        return res.status(500).json({ error: 'Internal server error' });
     }
 }
